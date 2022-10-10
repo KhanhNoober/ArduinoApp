@@ -66,6 +66,4 @@ function handleGreenLedClick() {
     port.write('3');
 }
 
-changeButtonRed({state: false, message: 'OFF'});
-changeButtonYellow({state: false, message: 'OFF'});
-changeButtonGreen({state: false, message: 'OFF'});
+port.write('Hello from Node.js!');
