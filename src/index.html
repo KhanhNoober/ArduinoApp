@@ -5,15 +5,37 @@
   <meta charset="UTF-8" />
   <title>Hello World!</title>
   <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
   <script defer type="module" src="test.js"></script>
 </head>
 
 <body>
-  <h1> Hello World!</h1>
-  <p id="display">Nothing</p>
-  <button id="1">1</button>
-  <button id="2">2</button>
-  <button id="3">3</button>
+  <div class="move">
+    <div class="container text-center">
+      <div class="row align-items-start">
+        <div class="col">
+          <h1>Chỉnh Led</h1>
+        </div>
+      </div>
+      <div class="row">
+        <p id="display"></p>
+      </div>
+      <div class="row align-items-center mt-3">
+        <div class="col">
+          <p>Red</p>
+          <button class="btn w-100 ml-3 mr-3" id="1"></button>
+        </div>
+        <div class="col">
+          <p>Yellow</p>
+          <button class="btn w-100 ml-3 mr-3" id="2"></button>
+        </div>
+        <div class="col">
+          <p>Green</p>
+          <button class="btn w-100 ml-3 mr-3" id="3"></button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

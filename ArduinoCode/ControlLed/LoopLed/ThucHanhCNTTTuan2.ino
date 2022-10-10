@@ -6,7 +6,6 @@
 #define green 200
 #define yellow 200
 
-
 char state;
 int count;
 
@@ -41,6 +40,7 @@ void loop() {
 
   }
 }
+
 
 void setLight(char c) {
   if(c == '1') {

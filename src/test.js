@@ -4,7 +4,7 @@ const { ReadlineParser } = require('@serialport/parser-readline');
 
 //create a new serial port object
 const port = new SerialPort({ 
-    path: 'COM4',
+    path: 'COM3',
     baudRate: 9600,
 }, false);
 
@@ -18,14 +18,37 @@ const parser = new ReadlineParser();
 port.pipe(parser);
 
 //read the data
-parser.on('data', (data) => {
-    display.innerText = data;
+port.on('data', (data) => {
+    let enc = new TextDecoder("utf-8");
+    let inputs = enc.decode(data).replace(/[^0-9 ]/g, "").split(' ');
+    console.log(inputs);
+    changeButtonRed({state: inputs[0] == '1', message: inputs[0] == '1' ? 'ON' : 'OFF'});
+    changeButtonYellow({state: inputs[1] == '1', message: inputs[1] == '1' ? 'ON' : 'OFF'});
+    changeButtonGreen({state: inputs[2] == '1', message: inputs[2] == '1' ? 'ON' : 'OFF'});
 });
+
+const changeButtonRed = (state) => {
+    redLed.innerText = state.message;
+    redLed.classList.remove(state.state ? 'btn-danger' : 'btn-success');
+    redLed.classList.add(state.state ? 'btn-success' : 'btn-danger');
+}
+
+const changeButtonYellow = (state) => {
+    yellowLed.innerText = state.message;
+    yellowLed.classList.remove(state.state ? 'btn-danger' : 'btn-success');
+    yellowLed.classList.add(state.state ? 'btn-success' : 'btn-danger');
+}
+
+const changeButtonGreen = (state) => {
+    greenLed.innerText = state.message;
+    greenLed.classList.remove(state.state ? 'btn-danger' : 'btn-success');
+    greenLed.classList.add(state.state ? 'btn-success' : 'btn-danger');
+}
+
 
 const redLed = document.getElementById('1');
 const yellowLed = document.getElementById('2');
 const greenLed = document.getElementById('3');
-const display = document.getElementById('display');
 
 redLed.onclick = handleRedLedClick;
 yellowLed.onclick = handleYellowLedClick;
@@ -42,3 +65,7 @@ function handleYellowLedClick() {
 function handleGreenLedClick() {
     port.write('3');
 }
+
+changeButtonRed({state: false, message: 'OFF'});
+changeButtonYellow({state: false, message: 'OFF'});
+changeButtonGreen({state: false, message: 'OFF'});
